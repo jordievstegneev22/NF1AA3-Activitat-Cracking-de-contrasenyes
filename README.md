@@ -113,7 +113,9 @@ john --wordlist=/usr/share/wordlists/rockyou.txt passwords-nomcognom
 john --incremental=Digits --min-len=4 --max-len=8 passwords-nomcognom
 ```
 
-![John solo carga un hash](imagenes/08-john-1hash.png)
+![John solo carga un hash](/img/8.png)
+
+![John solo carga un hash](/img/9.png)
 
 El motivo es que el fichero tenía **formatos de hash mezclados**: el usuario `gru` usa `$6$` (SHA-512) y el resto usa `$y$` (yescrypt). Por defecto, John solo carga el primer tipo que detecta. Comprobamos lo descifrado hasta el momento:
 
