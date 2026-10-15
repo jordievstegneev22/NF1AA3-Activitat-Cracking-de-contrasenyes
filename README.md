@@ -1,7 +1,6 @@
 # Auditoría de contraseñas en Linux con John the Ripper
 
 **Actividad NF1AA3 — Cracking de contraseñas**
-Autor: *[Tu nombre y apellido]*
 
 ## 1. Objetivo
 
@@ -26,7 +25,7 @@ Como se tiene acceso físico (consola) a la máquina, se aprovecha el gestor de 
 2. Seleccionar una de las entradas de arranque (modo de recuperación / rescate) y arrancar con ella.
 3. El sistema arranca en **modo rescate** y ofrece una shell de mantenimiento de root (`root@victim`) sin pedir contraseña.
 
-![Acceso root en modo rescate](imagenes/01-root-rescate.png)
+![Acceso root en modo rescate](/img/1.png)
 
 > **Nota de seguridad:** esto demuestra que, con acceso físico, la contraseña por sí sola no protege nada. El simple hecho de poder elegir una entrada de arranque da control total del sistema. Hacen falta capas adicionales (contraseña en GRUB, cifrado de disco, control de acceso físico).
 
@@ -57,7 +56,7 @@ Se obtiene la IP de la máquina Kali para saber a dónde enviar los ficheros:
 ip a
 ```
 
-![IP de la máquina Kali](imagenes/03-kali-ip.png)
+![IP de la máquina Kali](/img/3.png)
 
 Antes de transferir, en Kali hay que asegurarse de que el servicio SSH está activo:
 
