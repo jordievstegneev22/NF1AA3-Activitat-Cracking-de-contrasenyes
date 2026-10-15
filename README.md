@@ -72,7 +72,6 @@ Y desde la Ubuntu se transfieren los dos ficheros con `scp`:
 scp /etc/passwd /etc/shadow kali@10.0.2.15:.
 ```
 
-![Transferencia scp completada](imagenes/04-scp-ok.png)
 
 ---
 
