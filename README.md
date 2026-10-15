@@ -123,7 +123,7 @@ El motivo es que el fichero tenía **formatos de hash mezclados**: el usuario `g
 john --show passwords-nomcognom
 ```
 
-![john --show con gru](imagenes/09-john-show.png)
+![john --show con gru](/img/10.png)
 
 ### 5.2. Cracking con Johnny (interfaz gráfica)
 
@@ -132,15 +132,15 @@ Para cargar **todos** los hashes a la vez, se usa **Johnny** forzando el formato
 Se abre el fichero de contraseñas desde *Open password file*:
 
 
-![Abrir fichero en Johnny](imagenes/10-johnny-abrir.png)
+![Abrir fichero en Johnny](/img/11.png)
 
 En la pestaña *Options* se selecciona el formato `crypt` y el modo **Wordlist** con el diccionario `rockyou`:
 
-![Opciones de Johnny: format crypt y rockyou](imagenes/11-johnny-opciones.png)
+![Opciones de Johnny: format crypt y rockyou](/img/12.png)
 
 Se aplican los tres ataques (básico, diccionario y fuerza bruta numérica) y se obtiene el resultado final:
 
-![Resultados finales en Johnny](imagenes/12-johnny-resultados.png)
+![Resultados finales en Johnny](/img/13.png)
 
 ---
 
