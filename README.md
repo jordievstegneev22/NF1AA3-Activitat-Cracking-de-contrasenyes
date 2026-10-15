@@ -40,7 +40,7 @@ En modo rescate la red no se levanta, por lo que `enp0s3` aparece sin IP (`NO-CA
 ip a
 ```
 
-![Ubuntu sin red en modo rescate](imagenes/02-ubuntu-sin-red.png)
+![Ubuntu sin red en modo rescate](/img/2323.png/)
 
 Para solucionarlo, se pone una contraseña conocida a root y se reinicia en modo normal, donde la red sí obtiene IP:
 
