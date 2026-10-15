@@ -171,7 +171,7 @@ Se comprobó que las contraseñas obtenidas son válidas iniciando sesión con u
 su - gru
 ```
 
-![Verificación de login](imagenes/13-verificacion.png)
+![Verificación de login](/img/Captura%20de%20pantalla%202026-10-15%20194952.png)
 
 ---
 
