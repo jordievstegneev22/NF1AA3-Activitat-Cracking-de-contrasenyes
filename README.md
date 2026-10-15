@@ -104,7 +104,7 @@ Se lanza el primer ataque y John descifra la contraseña del usuario `gru`:
 john --single passwords-nomcognom
 ```
 
-![John descifra gru](imagenes/07-john-gru.png)
+![John descifra gru](/img/7.png)
 
 Sin embargo, al seguir con los demás ataques, John solo cargaba **1 hash** y devolvía *"No password hashes left to crack"*:
 
