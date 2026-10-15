@@ -18,23 +18,18 @@ Auditar la seguridad de las contraseñas de los usuarios de un servidor Linux (U
 
 ---
 
-## 3. Fase 1 — Acceso root mediante GRUB
+## 3. Fase 1 — Acceso root mediante el modo de recuperación de GRUB
 
-Como se tiene acceso físico (consola) a la máquina, se aprovecha el gestor de arranque GRUB para entrar sin conocer la contraseña.
+Como se tiene acceso físico (consola) a la máquina, se aprovecha el gestor de arranque GRUB para entrar como root sin conocer la contraseña.
 
-1. Reiniciar la VM y, en el menú de GRUB, pulsar `e` sobre la entrada de Ubuntu.
-2. En la línea que empieza por `linux`, cambiar `ro` por `rw` y añadir al final:
-
-```
-init=/bin/bash
-```
-
-3. Arrancar con `Ctrl + X`. Se entra directamente a una shell de root sin pedir contraseña.
-
+1. Reiniciar la VM. En el menú de GRUB aparecen varias entradas de Ubuntu.
+2. Seleccionar una de las entradas de arranque (modo de recuperación / rescate) y arrancar con ella.
+3. El sistema arranca en **modo rescate** y ofrece una shell de mantenimiento de root (`root@victim`) sin pedir contraseña.
 
 ![Acceso root en modo rescate](imagenes/01-root-rescate.png)
 
-> **Nota de seguridad:** esto demuestra que, con acceso físico, la contraseña por sí sola no protege nada. Hacen falta capas adicionales (contraseña en GRUB, cifrado de disco, control de acceso físico).
+> **Nota de seguridad:** esto demuestra que, con acceso físico, la contraseña por sí sola no protege nada. El simple hecho de poder elegir una entrada de arranque da control total del sistema. Hacen falta capas adicionales (contraseña en GRUB, cifrado de disco, control de acceso físico).
+
 
 ---
 
@@ -64,11 +59,11 @@ ip a
 
 ![IP de la máquina Kali](imagenes/03-kali-ip.png)
 
-
 Antes de transferir, en Kali hay que asegurarse de que el servicio SSH está activo:
 
 ```bash
 sudo systemctl start ssh
+
 sudo systemctl status ssh
 ```
 
@@ -96,11 +91,11 @@ Se instalan John y Johnny y se descomprime el diccionario rockyou:
 
 ```bash
 sudo apt install john johnny -y
-
 sudo gzip -d /usr/share/wordlists/rockyou.txt.gz
 ```
 
 ![Instalación de John y Johnny](imagenes/06-instalar-john.png)
+
 
 ### 5.1. Ataques por terminal y problema de formatos mezclados
 
@@ -129,12 +124,12 @@ john --show passwords-nomcognom
 
 ![john --show con gru](imagenes/09-john-show.png)
 
-
 ### 5.2. Cracking con Johnny (interfaz gráfica)
 
 Para cargar **todos** los hashes a la vez, se usa **Johnny** forzando el formato `crypt`, que utiliza la librería del sistema y soporta yescrypt.
 
 Se abre el fichero de contraseñas desde *Open password file*:
+
 
 ![Abrir fichero en Johnny](imagenes/10-johnny-abrir.png)
 
@@ -163,10 +158,10 @@ Se descifraron **5 de 6 contraseñas de usuario (83%)**:
 
 Las cuentas del sistema (`sshd` y servicios) aparecen con `!` o `*`: están **bloqueadas**, no tienen contraseña de login, por lo que no son vulnerables.
 
-
 El caso de `scarlet` demuestra, por contraste, cómo una contraseña robusta resiste todos los ataques aplicados.
 
 ---
+
 
 ## 7. Verificación
 
@@ -176,13 +171,15 @@ Se comprobó que las contraseñas obtenidas son válidas iniciando sesión con u
 su - gru
 ```
 
+![Verificación de login](imagenes/13-verificacion.png)
+
 ---
 
 ## 8. Medidas de mejora y política de contraseñas
 
 ### Fortificación del equipo (nivel lógico)
 
-- Proteger el **GRUB con contraseña** para impedir el truco de `init=/bin/bash`.
+- Proteger el **GRUB con contraseña** para impedir el acceso por el modo de recuperación.
 - **Cifrar el disco** (LUKS), de modo que los ficheros no se puedan leer aunque se acceda físicamente.
 - Poner contraseña a la **BIOS/UEFI** y controlar el orden de arranque.
 - Restringir el **acceso físico** a la máquina.
@@ -195,9 +192,9 @@ su - gru
 - Prohibir palabras de diccionario, el nombre de usuario y datos personales.
 - No reutilizar contraseñas ya filtradas (validar con `pam_pwquality`).
 - Caducidad y renovación periódica.
-
 - Uso de un **gestor de contraseñas**.
 - Mantener un algoritmo de hashing fuerte (**yescrypt**, por defecto en las distros modernas).
+
 
 ---
 
@@ -228,10 +225,10 @@ Aplicar los cambios:
 sudo update-grub
 ```
 
-
-A partir de ahora, editar cualquier entrada del GRUB pedirá usuario y contraseña, bloqueando el ataque original.
+A partir de ahora, editar o arrancar entradas del GRUB pedirá usuario y contraseña, bloqueando el acceso por el modo de recuperación.
 
 ---
+
 
 ## 10. Conclusión
 
