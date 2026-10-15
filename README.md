@@ -84,7 +84,7 @@ En Kali se comprueba que el servicio SSH está activo y se combinan los dos fich
 unshadow passwd shadow > passwords-nomcognom
 ```
 
-![SSH activo y unshadow](imagenes/05-ssh-unshadow.png)
+![SSH activo y unshadow](/img/5.png)
 
 Se instalan John y Johnny y se descomprime el diccionario rockyou:
 
@@ -93,7 +93,7 @@ sudo apt install john johnny -y
 sudo gzip -d /usr/share/wordlists/rockyou.txt.gz
 ```
 
-![Instalación de John y Johnny](imagenes/06-instalar-john.png)
+![Instalación de John y Johnny](/img/Captura%20de%20pantalla%202026-10-13%20164623.png)
 
 
 ### 5.1. Ataques por terminal y problema de formatos mezclados
